@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { List, Typography, Input, Row, Col, Button } from "antd";
+import ContactForm from "../components/ContactForm";
+import ContactSearch from "../components/ContactSearch";
+import { List, Typography } from "antd";
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -47,6 +49,7 @@ const Contact = () => {
       phone
     });
     setContacts(datas);
+    setListContact(datas);
     setForm({
       ...form,
       name: "",
@@ -79,38 +82,13 @@ const Contact = () => {
   return (
     <>
       <div>
-        <Row>
-          <Col span={24}>
-            <Input
-              name="search"
-              placeholder="전화번호 검색"
-              onChange={handleSearch}
-            ></Input>
-          </Col>
-        </Row>
-        <Row>
-          <Col span={10}>
-            <Input
-              name="name"
-              placeholder="이름"
-              onChange={handleChange}
-              value={form.name}
-            ></Input>
-          </Col>
-          <Col span={10}>
-            <Input
-              name="phone"
-              placeholder="전화번호"
-              onChange={handleChange}
-              value={form.phone}
-            ></Input>
-          </Col>
-          <Col span={4}>
-            <Button type="primary" onClick={handleClick}>
-              등록
-            </Button>
-          </Col>
-        </Row>
+        <ContactSearch handleSearch={handleSearch}></ContactSearch>
+        <ContactForm
+          name={form.name}
+          phone={form.phone}
+          handleChange={handleChange}
+          handleClick={handleClick}
+        ></ContactForm>
       </div>
       <List
         header={<div>주소록</div>}

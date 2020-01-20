@@ -7,6 +7,7 @@ const Contact = () => {
     name: "",
     phone: ""
   });
+  const [search, setSearch] = useState("");
   const [contacts, setContacts] = useState([
     {
       name: "딸",
@@ -29,6 +30,7 @@ const Contact = () => {
       phone: "01055556666"
     }
   ]);
+  const [listContact, setListContact] = useState(contacts);
 
   const handleClick = e => {
     const { name, phone } = form;
@@ -66,9 +68,26 @@ const Contact = () => {
     setContacts(datas);
   };
 
+  const handleSearch = e => {
+    setSearch(e.target.value);
+    const datas = contacts.filter(currect => {
+      return currect.phone.indexOf(search) > -1;
+    });
+    setListContact(datas);
+  };
+
   return (
     <>
       <div>
+        <Row>
+          <Col span={24}>
+            <Input
+              name="search"
+              placeholder="전화번호 검색"
+              onChange={handleSearch}
+            ></Input>
+          </Col>
+        </Row>
         <Row>
           <Col span={10}>
             <Input
@@ -95,20 +114,34 @@ const Contact = () => {
       </div>
       <List
         header={<div>주소록</div>}
-        footer={<div>Footer</div>}
+        footer={
+          <div>
+            <ul>
+              <li>간단히 만든 주소록</li>
+              <li>리액트로 구현</li>
+              <li>expo로 Ios / And에서도 사용가능</li>
+              <li>디자인은 antd 라이브러리</li>
+              <li>gh-pages 로 빌드 후 github.io 등록</li>
+              <li>localStorage 로 저장해도 되는데 귀찮</li>
+              <li>더블클릭시 삭제됨</li>
+            </ul>
+          </div>
+        }
         bordered
-        dataSource={contacts}
-        renderItem={contact => (
-          <List.Item
-            style={{ cursor: "pointer" }}
-            onDoubleClick={() => {
-              handleDoubleClick(contact.phone);
-            }}
-          >
-            <Typography.Text mark>{contact.name}</Typography.Text>{" "}
-            {contact.phone}
-          </List.Item>
-        )}
+        dataSource={listContact}
+        renderItem={contact => {
+          return (
+            <List.Item
+              style={{ cursor: "pointer" }}
+              onDoubleClick={() => {
+                handleDoubleClick(contact.phone);
+              }}
+            >
+              <Typography.Text mark>{contact.name}</Typography.Text>{" "}
+              {contact.phone}
+            </List.Item>
+          );
+        }}
       />
     </>
   );

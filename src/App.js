@@ -8,7 +8,7 @@ const { Header, Footer, Content } = Layout;
 function App() {
   return (
     <Layout>
-      <Header>주소록</Header>
+      <Header style={{ color: "#FFF" }}>주소록</Header>
       <Layout>
         <Content>
           <Contact></Contact>

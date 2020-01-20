@@ -12,23 +12,23 @@ const Contact = () => {
   const [search, setSearch] = useState("");
   const [contacts, setContacts] = useState([
     {
-      name: "딸",
+      name: "아이린",
       phone: "01011112222"
     },
     {
-      name: "아내",
+      name: "웬디",
       phone: "01022223333"
     },
     {
-      name: "나",
+      name: "예리",
       phone: "01033334444"
     },
     {
-      name: "형",
+      name: "슬기",
       phone: "01044445555"
     },
     {
-      name: "엄마",
+      name: "조이",
       phone: "01055556666"
     }
   ]);
@@ -69,10 +69,12 @@ const Contact = () => {
       return current.phone !== phone;
     });
     setContacts(datas);
+    setListContact(datas);
   };
 
   const handleSearch = e => {
     setSearch(e.target.value);
+    console.log(contacts);
     const datas = contacts.filter(currect => {
       return currect.phone.indexOf(search) > -1;
     });
@@ -91,7 +93,6 @@ const Contact = () => {
         ></ContactForm>
       </div>
       <List
-        header={<div>주소록</div>}
         footer={
           <div>
             <ul>

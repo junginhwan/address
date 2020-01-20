@@ -9,7 +9,6 @@ const Contact = () => {
     name: "",
     phone: ""
   });
-  const [search, setSearch] = useState("");
   const [contacts, setContacts] = useState([
     {
       name: "아이린",
@@ -73,10 +72,10 @@ const Contact = () => {
   };
 
   const handleSearch = e => {
-    setSearch(e.target.value);
-    console.log(contacts);
     const datas = contacts.filter(currect => {
-      return currect.phone.indexOf(search) > -1;
+      return e.target.value.length > 0
+        ? currect.phone.indexOf(e.target.value) > -1
+        : currect;
     });
     setListContact(datas);
   };
